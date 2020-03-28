@@ -183,6 +183,15 @@ import Card from './Model/Card.js';
 import CardList from './Model/CardList.js';
 import CardListView from './View/CardListView.js';
 
+import PopupAddCard from './Model/PopupAddCard.js';
+import PopupAddCardView from './View/PopupAddCardView.js';
+
+import PopupEditProfile from './Model/PopupEditProfile.js';
+import PopupEditProfileView from './View/PopupEditProfileView.js';
+
+import PopupShowImage from './Model/PopupShowImage.js';
+import PopupShowImageView from './View/PopupShowImageView.js';
+
 const cards = [
     new Card('Архыз', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'),
     new Card('Челябинская область', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'),
@@ -200,5 +209,27 @@ const cardList = new CardList(cards);
 const cardListView = new CardListView(document.querySelector('.places-list'), cardList);
 
 cardListView.render();
+
+const popupContainer = document.querySelector('.popup-container');
+
+const popupAddCardView = new PopupAddCardView(
+  popupContainer,
+  document.querySelector('.user-info__button'),
+  new PopupAddCard('add-card')
+);
+const popupEditProfileView = new PopupEditProfileView(
+  popupContainer,
+  document.querySelector('.button.user-info__edit'),
+  new PopupEditProfile('profile')
+);
+const popupShowImageView = new PopupShowImageView(
+  popupContainer,
+  null,
+  new PopupShowImage('big-size-image')
+);
+
+// popupAddCardView.render();
+// popupEditProfileView.render();
+// popupShowImageView.render();
 
 // initCallback();

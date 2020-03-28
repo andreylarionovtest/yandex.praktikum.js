@@ -5,89 +5,6 @@
 // const formPopupProfile = document.querySelector("#profile");
 // const bigSizeImage = document.querySelector("#big-size-image");
 //
-// const initialCards = [
-//     {
-//         name: 'Архыз',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-//     },
-//     {
-//         name: 'Челябинская область',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-//     },
-//     {
-//         name: 'Иваново',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//     },
-//     {
-//         name: 'Камчатка',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-//     },
-//     {
-//         name: 'Холмогорский район',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-//     },
-//     {
-//         name: 'Байкал',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-//     },
-//     {
-//         name: 'Нургуш',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/khrebet-nurgush.jpg'
-//     },
-//     {
-//         name: 'Тулиновка',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/tulinovka.jpg'
-//     },
-//     {
-//         name: 'Остров Желтухина',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/zheltukhin-island.jpg'
-//     },
-//     {
-//         name: 'Владивосток',
-//         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/vladivostok.jpg'
-//     }
-// ];
-//
-//
-// function addOneCard(name, url){
-//     //формируем все элементы
-//     const oneCard = document.createElement("div");
-//     oneCard.classList.add("place-card");
-//
-//     const imgCard = document.createElement("div");
-//     imgCard.classList.add("place-card__image");
-//     imgCard.style.backgroundImage = `url(${url})`;
-//
-//     const btnImgCard = document.createElement("button");
-//     btnImgCard.classList.add("place-card__delete-icon");
-//
-//     const descCard = document.createElement("div");
-//     descCard.classList.add("place-card__description");
-//
-//     const h3Card = document.createElement("h3");
-//     h3Card.classList.add("place-card__name");
-//     h3Card.textContent = name;
-//
-//     const btnLike = document.createElement("button");
-//     btnLike.classList.add("place-card__like-icon");
-//
-//     //сливаем их в один
-//     oneCard.appendChild(imgCard);
-//         imgCard.appendChild(btnImgCard);
-//     oneCard.appendChild(descCard);
-//         descCard.appendChild(h3Card);
-//         descCard.appendChild(btnLike);
-//
-//     //добавляем карточку на страницу
-//     cards.appendChild(oneCard);
-// }
-//
-//
-// function loadCards(){
-//     initialCards.forEach(function (item){
-//         addOneCard(item.name, item.link);
-//     });
-// }
 //
 // function toggleFormAdd(){//коллбэк для открытия и закрытия формы добавления карточки
 //     validateAddCardForm();
@@ -280,9 +197,8 @@ const cards = [
 ];
 
 const cardList = new CardList(cards);
-const cardListView = new CardListView(document.querySelector('.places-list'));
+const cardListView = new CardListView(document.querySelector('.places-list'), cardList);
 
-cardListView.render(cards);
+cardListView.render();
 
-// loadCards();
 // initCallback();

@@ -7,15 +7,18 @@ class CardList {
     this._bindListeners();
   }
 
+  getCards() {
+    return this._cards;
+  }
   addCard(card) {
     this._cards.push(card);
-    EventAggregator.publish('CardList.update', this._cards);
+    EventAggregator.publish('CardList.update');
   }
   removeCard(card) {
-    const index = this._cards.indexOf(card);
-    this._cards[index] = null;
-    delete(this._cards[index]);
-    EventAggregator.publish('CardList.update', this._cards);
+    this._cards = this._cards.filter(function (_card) {
+      return _card !== card;
+    });
+    EventAggregator.publish('CardList.update');
   }
 
   _bindListeners() {

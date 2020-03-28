@@ -2,14 +2,16 @@ import EventAggregator from '../Event/EventAggregator.js';
 import CardView from './CardView.js';
 
 class CardListView {
-  constructor(element) {
+  constructor(element, cardList) {
     this._element = element;
+    this._cardList = cardList;
+
     this._bindListeners();
   }
 
-  render(cards) {
+  render() {
     this._element.innerHTML = '';
-    cards.forEach((card) => {
+    this._cardList.getCards().forEach((card) => {
       this._element.appendChild((new CardView(card)).create());
     });
   }
@@ -17,8 +19,8 @@ class CardListView {
   _bindListeners() {
     EventAggregator.subscribe('CardList.update', this._onCardListUpdate.bind(this))
   }
-  _onCardListUpdate(cards) {
-    this.render(cards);
+  _onCardListUpdate() {
+    this.render();
   }
 }
 

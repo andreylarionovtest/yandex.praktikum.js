@@ -8,8 +8,10 @@ class Card {
 
     this._bindListeners();
   }
-  like () {
+
+  toggleLike() {
     this.favorite = !this.favorite;
+    EventAggregator.publish('Card.like', this);
   }
   remove() {
     EventAggregator.publish('Card.remove', this);
@@ -17,11 +19,16 @@ class Card {
 
   _bindListeners() {
     EventAggregator.subscribe('CardView.remove', this._onCardViewRemove.bind(this));
+    EventAggregator.subscribe('CardView.like', this._onCardViewLike.bind(this));
   }
   _onCardViewRemove(card) {
-    console.log('onCardViewRemove');
     if (this === card) {
       this.remove();
+    }
+  }
+  _onCardViewLike(card) {
+    if (this === card) {
+      this.toggleLike();
     }
   }
 }

@@ -224,7 +224,7 @@ const popupAddCardView = new PopupAddCardView(
 const popupEditProfileView = new PopupEditProfileView(
   popupContainer,
   document.querySelector('.button.user-info__edit'),
-  new PopupEditProfile('profile')
+  new PopupEditProfile('profile', {...profile})
 );
 const popupShowImageView = new PopupShowImageView(
   popupContainer,

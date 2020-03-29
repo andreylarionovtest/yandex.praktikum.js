@@ -17,9 +17,11 @@ class PopupEditProfileView extends PopupView {
 
     const inputName = content.querySelector('input[name="name"]');
     inputName.addEventListener('input', this._handleInputNameInput.bind(this));
+    inputName.value = this.getState().getModel().name;
 
     const inputJob = content.querySelector('input[name="job"]');
     inputJob.addEventListener('input', this._handleInputJobInput.bind(this));
+    inputJob.value = this.getState().getModel().job;
 
     const form = content.querySelector('form');
     form.addEventListener('submit', this._handleFormSubmit.bind(this));

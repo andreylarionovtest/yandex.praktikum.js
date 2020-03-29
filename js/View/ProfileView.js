@@ -11,11 +11,8 @@ class ProfileView {
   }
 
   render() {
-    this._nameElement.textContent = this.getProfile().getName();
-    this._jobElement.textContent = this.getProfile().getJob();
-  }
-  getProfile() {
-    return this._profile;
+    this._nameElement.textContent = this._profile.name;
+    this._jobElement.textContent = this._profile.job;
   }
 
   _bindListeners() {

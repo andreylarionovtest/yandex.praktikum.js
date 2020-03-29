@@ -1,8 +1,10 @@
 import Popup from './Popup.js';
-import Profile from './Profile.js';
 
 class PopupEditProfile extends Popup {
-  _model = new Profile();
+  constructor(id, model) {
+    super(id);
+    this._model = model;
+  }
   bindListeners() {
     super.bindListeners();
     this._eventAggregator.subscribe('PopupEditProfileView.InputName.input', this._onInputNameInput.bind(this));
@@ -12,22 +14,23 @@ class PopupEditProfile extends Popup {
   }
 
   _onInputNameInput(value) {
-    this._model.setName(value);
+    this._model.name = value;
     this._validate()
   }
   _onInputJobInput(value) {
-    this._model.setJob(value);
+    this._model.job = value;
     this._validate()
   }
   _onFormSubmit() {
     this._eventAggregator.publish('PopupEditProfile.submit', this._model);
+    this.close()
   }
-  _onProfileUpdate() {
-    this.close();
+  _onProfileUpdate(model) {
+    this._model = model;
   }
-  open() {
-    super.open();
-    this._model = new Profile();
+  close() {
+    super.close();
+    this._eventAggregator.publish('PopupEditProfile.close');
   }
 
   _validate() {

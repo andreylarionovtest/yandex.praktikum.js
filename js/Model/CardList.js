@@ -23,9 +23,13 @@ class CardList {
 
   _bindListeners() {
     EventAggregator.subscribe('Card.remove', this._onCardRemoved.bind(this));
+    EventAggregator.subscribe('PopupAddCard.submit', this._onPopupAddCardSubmit.bind(this));
   }
   _onCardRemoved(card) {
     this.removeCard(card);
+  }
+  _onPopupAddCardSubmit(card) {
+    this.addCard(card);
   }
 }
 

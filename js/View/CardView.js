@@ -17,7 +17,7 @@ class CardView {
 
     const imgCard = document.createElement("div");
     imgCard.classList.add("place-card__image");
-    imgCard.style.backgroundImage = `url(${this._card.imageSrc})`;
+    imgCard.style.backgroundImage = `url(${this._card.getImageSrc()})`;
 
     const btnRemove = document.createElement("button");
     btnRemove.classList.add("place-card__delete-icon");
@@ -28,12 +28,12 @@ class CardView {
 
     const h3Card = document.createElement("h3");
     h3Card.classList.add("place-card__name");
-    h3Card.textContent = this._card.name;
+    h3Card.textContent = this._card.getName();
 
     const btnLike = document.createElement("button");
     btnLike.classList.add("place-card__like-icon");
     btnLike.addEventListener('click', this._handleBtnLikeClick.bind(this));
-    if (this._card.favorite) {
+    if (this._card.isFavorite()) {
       btnLike.classList.add('place-card__like-icon_liked');
     }
     this._btnLike = btnLike;
@@ -49,7 +49,7 @@ class CardView {
   }
 
   toggleLike() {
-    if (this._card.favorite) {
+    if (this._card.isFavorite()) {
       this._btnLike.classList.add('place-card__like-icon_liked');
     } else {
       this._btnLike.classList.remove('place-card__like-icon_liked');

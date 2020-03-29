@@ -33,7 +33,7 @@ class PopupView {
 
     return content;
   }
-  getPopupState() {
+  getState() {
     return this._state;
   }
 

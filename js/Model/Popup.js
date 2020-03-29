@@ -2,11 +2,12 @@ import EventAggregator from '../Event/EventAggregator.js';
 
 class Popup {
   _visible = false;
+  _model = null;
   _eventAggregator = EventAggregator;
 
   constructor(id) {
     this._id = id;
-    this._bindListeners();
+    this.bindListeners();
   }
 
   open() {
@@ -20,14 +21,14 @@ class Popup {
   getId() {
     return this._id;
   }
-  getFormEntity() {
-    return this._formEntity;
+  getModel() {
+    return this._model;
   }
   isVisible() {
     return this._visible;
   }
 
-  _bindListeners() {
+  bindListeners() {
     this._eventAggregator.subscribe('PopupView.open', this._onPopupViewOpen.bind(this));
     this._eventAggregator.subscribe('PopupView.close', this._onPopupViewClose.bind(this));
   }

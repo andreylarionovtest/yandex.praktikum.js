@@ -12,7 +12,7 @@ class PopupView {
     this._state = state;
     this._openButton = openButton;
 
-    this._makePopupView();
+    this.makeRootElement();
     this.bindListeners();
     this.bindDOMListeners();
   }
@@ -67,30 +67,20 @@ class PopupView {
     this._eventAggregator.publish('PopupView.close', this._state);
   }
 
-  _makePopupView() {
-    const popupView = document.createElement('div');
-    popupView.classList.add('popup');
-    if (this._state.isVisible()) {
-      popupView.classList.add('popup_is-opened');
-    }
+  makeRootElement() {
+    const root = document.createElement('div');
+    root.classList.add('popup');
 
-    const popupContent = document.createElement('div');
-    popupContent.classList.add('popup__content');
-    popupView.appendChild(popupContent);
+    root.innerHTML = `
+      <div class="popup__content">
+          <img src="./images/close.svg" alt="" class="popup__close">
+          <div class="popup__content-inner"></div>
+      </div>`;
 
-    const popupClose = document.createElement('img');
-    popupClose.classList.add('popup__close');
-    popupClose.src = './images/close.svg';
-    this._closeButton = popupClose;
-    popupContent.appendChild(popupClose);
-
-    const popupContentInner = document.createElement('div');
-    popupContentInner.classList.add('popup__content-inner');
-    this._content = popupContentInner;
-    popupContent.appendChild(popupContentInner);
-
-    this._root = popupView;
-    this._container.appendChild(popupView);
+    this._root = root;
+    this._closeButton = this._root.querySelector('.popup__close');
+    this._content = this._root.querySelector('.popup__content-inner');
+    this._container.appendChild(root);
   }
 }
 

@@ -21,7 +21,6 @@ class CardView {
 
     const btnRemove = document.createElement("button");
     btnRemove.classList.add("place-card__delete-icon");
-    btnRemove.addEventListener('click', this._handleBtnRemoveClick.bind(this));
 
     const descCard = document.createElement("div");
     descCard.classList.add("place-card__description");
@@ -32,7 +31,6 @@ class CardView {
 
     const btnLike = document.createElement("button");
     btnLike.classList.add("place-card__like-icon");
-    btnLike.addEventListener('click', this._handleBtnLikeClick.bind(this));
     if (this._card.isFavorite()) {
       btnLike.classList.add('place-card__like-icon_liked');
     }
@@ -44,6 +42,10 @@ class CardView {
     this._element.appendChild(descCard);
         descCard.appendChild(h3Card);
         descCard.appendChild(btnLike);
+
+    btnRemove.addEventListener('click', this._handleBtnRemoveClick.bind(this));
+    btnLike.addEventListener('click', this._handleBtnLikeClick.bind(this));
+    imgCard.addEventListener('click', this._handleImageCardClick.bind(this));
 
     return this._element;
   }
@@ -59,9 +61,13 @@ class CardView {
   _handleBtnLikeClick() {
     EventAggregator.publish('CardView.like', this._card);
   }
-
   _handleBtnRemoveClick() {
     EventAggregator.publish('CardView.remove', this._card);
+  }
+  _handleImageCardClick(e) {
+    if (e.target.classList.contains('place-card__image')) {
+      EventAggregator.publish('CardView.showImage', this._card.getImageSrc())
+    }
   }
 
   _bindListeners() {

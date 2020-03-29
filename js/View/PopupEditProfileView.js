@@ -34,8 +34,8 @@ class PopupEditProfileView extends PopupView {
     this._eventAggregator.subscribe('PopupEditProfile.validate', this._onProfileValidate.bind(this));
   }
 
-  _onProfileValidate(errors) {
-    this._renderErrors(errors);
+  _onProfileValidate() {
+    this._renderErrors();
   }
 
   _handleInputNameInput(event) {
@@ -49,8 +49,13 @@ class PopupEditProfileView extends PopupView {
     this._eventAggregator.publish('PopupEditProfileView.Form.submit');
   }
 
-  _renderErrors(errors) {
-    console.log(errors);
+  _renderErrors() {
+    const nameErrorElement = document.forms.profile.name.nextElementSibling;
+    const jobErrorElement = document.forms.profile.job.nextElementSibling;
+    const errors = this.getState().getErrors();
+
+    nameErrorElement.textContent = errors.name || '';
+    jobErrorElement.textContent = errors.job || '';
   }
 }
 

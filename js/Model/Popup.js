@@ -4,6 +4,7 @@ class Popup {
   _visible = false;
   _model = null;
   _eventAggregator = EventAggregator;
+  _errors = {};
 
   constructor(id) {
     this._id = id;
@@ -24,8 +25,25 @@ class Popup {
   getModel() {
     return this._model;
   }
-  isVisible() {
-    return this._visible;
+  getErrors() {
+    return this._errors;
+  }
+
+  validateLength(propName, value, min, max) {
+    if (! value) {
+      this._errors[propName] = 'Это обязательное поле';
+      return;
+    }
+    if (value.length < min || value.length > max) {
+      this._errors[propName] = 'Должно быть от 2 до 30 символов';
+      return;
+    }
+    if (this._errors.hasOwnProperty(propName)) {
+      delete(this._errors[propName]);
+    }
+  }
+  isValid() {
+    return Object.entries(this._errors).length === 0;
   }
 
   bindListeners() {

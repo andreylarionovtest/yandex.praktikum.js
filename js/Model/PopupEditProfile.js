@@ -15,13 +15,21 @@ class PopupEditProfile extends Popup {
 
   _onInputNameInput(value) {
     this._model.name = value;
-    this._validate()
+    this._validate();
   }
   _onInputJobInput(value) {
     this._model.job = value;
-    this._validate()
+    this._validate();
+  }
+  _validate() {
+    this.validateLength('name', this._model.name, 2, 30);
+    this.validateLength('job', this._model.job, 2, 30);
+    this._eventAggregator.publish('PopupEditProfile.validate');
   }
   _onFormSubmit() {
+    if (! this.isValid()) {
+      return;
+    }
     this._eventAggregator.publish('PopupEditProfile.submit', this._model);
     this.close()
   }
@@ -32,14 +40,9 @@ class PopupEditProfile extends Popup {
     super.close();
     this._eventAggregator.publish('PopupEditProfile.close');
   }
-
-  _validate() {
-    console.log(this._model);
-    const errors = {
-      name: 'Это обязательное поле',
-      job: 'Это обязательное поле'
-    };
-    this._eventAggregator.publish('PopupEditProfile.validate', errors);
+  open() {
+    super.open();
+    this._validate();
   }
 }
 

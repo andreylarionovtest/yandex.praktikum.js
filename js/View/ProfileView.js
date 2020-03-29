@@ -6,6 +6,8 @@ class ProfileView {
 
   constructor(profile) {
     this._profile = profile;
+
+    this._bindListeners();
   }
 
   render() {
@@ -14,6 +16,14 @@ class ProfileView {
   }
   getProfile() {
     return this._profile;
+  }
+
+  _bindListeners() {
+    EventAggregator.subscribe('Profile.update', this._onProfileUpdate.bind(this));
+  }
+
+  _onProfileUpdate() {
+    this.render();
   }
 
 }

@@ -1,10 +1,6 @@
 import PopupView from './PopupView.js';
 
 class PopupAddCardView extends PopupView {
-  _inputName = null;
-  _inputLink = null;
-  _btnSubmit = null;
-
   getContent() {
     const content = document.createElement('div');
     content.classList.add('popup__form-wrapper');
@@ -25,7 +21,6 @@ class PopupAddCardView extends PopupView {
     inputName.placeholder = 'Название';
     inputName.type = 'text';
     inputName.name = 'name';
-    this._inputName = inputName;
     form.appendChild(inputName);
 
     inputName.addEventListener('input', this._handleInputNameInput.bind(this));
@@ -36,7 +31,6 @@ class PopupAddCardView extends PopupView {
     inputLink.placeholder = 'Ссылка на картинку';
     inputLink.type = 'text';
     inputLink.name = 'link';
-    this._inputLink = inputLink;
     form.appendChild(inputLink);
 
     inputLink.addEventListener('input', this._handleInputLinkInput.bind(this));
@@ -45,7 +39,6 @@ class PopupAddCardView extends PopupView {
     btnSubmit.textContent = '+';
     btnSubmit.classList.add('button');
     btnSubmit.classList.add('popup__button');
-    this._btnSubmit = btnSubmit;
     form.appendChild(btnSubmit);
 
     form.addEventListener('submit', this._handleFormSubmit.bind(this));

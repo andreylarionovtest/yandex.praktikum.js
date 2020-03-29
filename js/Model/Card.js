@@ -2,33 +2,15 @@ import EventAggregator from '../Event/EventAggregator.js';
 
 class Card {
   constructor(name, imageSrc, favorite) {
-    this._name = name;
-    this._imageSrc = imageSrc;
-    this._favorite = favorite;
+    this.name = name;
+    this.imageSrc = imageSrc;
+    this.favorite = favorite;
 
     this._bindListeners();
   }
 
-  getName() {
-    return this._name;
-  }
-  setName(name) {
-    this._name = name;
-  }
-
-  getImageSrc() {
-    return this._imageSrc;
-  }
-  setImageSrc(imageSrc) {
-    this._imageSrc = imageSrc;
-  }
-
-  isFavorite() {
-    return this._favorite;
-  }
-
   toggleLike() {
-    this._favorite = !this._favorite;
+    this.favorite = !this.favorite;
     EventAggregator.publish('Card.like', this);
   }
   remove() {

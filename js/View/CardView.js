@@ -17,7 +17,7 @@ class CardView {
 
     const imgCard = document.createElement("div");
     imgCard.classList.add("place-card__image");
-    imgCard.style.backgroundImage = `url(${this._card.getImageSrc()})`;
+    imgCard.style.backgroundImage = `url(${this._card.imageSrc})`;
 
     const btnRemove = document.createElement("button");
     btnRemove.classList.add("place-card__delete-icon");
@@ -27,11 +27,11 @@ class CardView {
 
     const h3Card = document.createElement("h3");
     h3Card.classList.add("place-card__name");
-    h3Card.textContent = this._card.getName();
+    h3Card.textContent = this._card.name;
 
     const btnLike = document.createElement("button");
     btnLike.classList.add("place-card__like-icon");
-    if (this._card.isFavorite()) {
+    if (this._card.favorite) {
       btnLike.classList.add('place-card__like-icon_liked');
     }
     this._btnLike = btnLike;
@@ -51,7 +51,7 @@ class CardView {
   }
 
   toggleLike() {
-    if (this._card.isFavorite()) {
+    if (this._card.favorite) {
       this._btnLike.classList.add('place-card__like-icon_liked');
     } else {
       this._btnLike.classList.remove('place-card__like-icon_liked');
@@ -66,7 +66,7 @@ class CardView {
   }
   _handleImageCardClick(e) {
     if (e.target.classList.contains('place-card__image')) {
-      EventAggregator.publish('CardView.showImage', this._card.getImageSrc())
+      EventAggregator.publish('CardView.showImage', this._card.imageSrc)
     }
   }
 

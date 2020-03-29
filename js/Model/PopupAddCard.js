@@ -11,32 +11,54 @@ class PopupAddCard extends Popup {
     this._eventAggregator.subscribe('CardList.update', this._onCardListUpdate.bind(this));
   }
 
+  open() {
+    super.open();
+    this._model = new Card();
+    this._validate();
+  }
+
   _onInputNameInput(value) {
-    this._model.setName(value);
+    this._model.name = value;
     this._validate()
   }
   _onInputLinkInput(value) {
-    this._model.setImageSrc(value);
+    this._model.imageSrc = value;
     this._validate()
   }
   _onFormSubmit() {
+    if (! this.isValid()) {
+      return;
+    }
     this._eventAggregator.publish('PopupAddCard.submit', this._model);
   }
   _onCardListUpdate() {
     this.close();
   }
-  open() {
-    super.open();
-    this._model = new Card();
+
+  _validateUrl(propName, value) {
+    const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+
+    const isValid = !!pattern.test(value);
+
+    if (! isValid) {
+      this._errors[propName] = 'Здесь должна быть ссылка';
+      return;
+    }
+
+    if (this._errors.hasOwnProperty(propName)) {
+      delete(this._errors[propName]);
+    }
   }
 
   _validate() {
-    console.log(this._model);
-    const errors = {
-      name: 'Это обязательное поле',
-      imageSrc: 'Здесь должна быть ссылка'
-    };
-    this._eventAggregator.publish('PopupAddCard.validate', errors);
+    this.validateLength('name', this._model.name, 2, 30);
+    this._validateUrl('imageSrc', this._model.imageSrc, 2, 30);
+    this._eventAggregator.publish('PopupAddCard.validate');
   }
 }
 

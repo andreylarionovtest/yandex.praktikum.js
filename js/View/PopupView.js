@@ -1,16 +1,14 @@
 import Observer from '../Observer/Observer.js';
 
 class PopupView {
-  _observer = Observer;
-  _root = null;
-  _content = null;
-  _openButton = null;
-  _closeButton = null;
-
   constructor(container, openButton, state) {
     this._container = container;
     this._state = state;
+    this._observer = Observer;
+    this._root = null;
+    this._content = null;
     this._openButton = openButton;
+    this._closeButton = null;
 
     this.makeRootElement();
     this.bindListeners();

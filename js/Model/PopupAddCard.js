@@ -2,7 +2,10 @@ import Popup from './Popup.js';
 import Card from './Card.js';
 
 class PopupAddCard extends Popup {
-  _model = new Card();
+  constructor(id) {
+    super(id);
+    this._model = new Card();
+  }
   bindListeners() {
     super.bindListeners();
     this.getObserver().subscribe('PopupAddCardView.InputName.input', this._onInputNameInput.bind(this));

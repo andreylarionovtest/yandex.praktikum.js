@@ -1,11 +1,10 @@
 import Observer from '../Observer/Observer.js';
 
 class ProfileView {
-  _nameElement = document.querySelector('.user-info__name');
-  _jobElement = document.querySelector('.user-info__job');
-
   constructor(profile) {
     this._profile = profile;
+    this._nameElement = document.querySelector('.user-info__name');
+    this._jobElement = document.querySelector('.user-info__job');
 
     this._bindListeners();
   }

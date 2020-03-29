@@ -1,6 +1,6 @@
 class Event {
-  _handlers = [];
   constructor(name) {
+    this._handlers = [];
     this.name = name;
   }
   addHandler(handler) {

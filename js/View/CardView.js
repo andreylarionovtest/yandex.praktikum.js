@@ -1,11 +1,10 @@
 import Observer from '../Observer/Observer.js';
 
 class CardView {
-  _element = null;
-  _btnLike = null;
-
   constructor(card) {
     this._card = card;
+    this._element = null;
+    this._btnLike = null;
 
     this._bindListeners();
   }

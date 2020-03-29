@@ -1,22 +1,18 @@
 import Observer from '../Observer/Observer.js';
 
 class Popup {
-  _visible = false;
-  _model = null;
-  _observer = Observer;
-  _errors = {};
-
   constructor(id) {
+    this._model = null;
+    this._observer = Observer;
+    this._errors = {};
     this._id = id;
     this.bindListeners();
   }
 
   open() {
-    this._visible = true;
     this.getObserver().notify('Popup.open', this);
   }
   close() {
-    this._visible = false;
     this.getObserver().notify('Popup.close', this);
   }
   getId() {

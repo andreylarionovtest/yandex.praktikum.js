@@ -1,8 +1,9 @@
 import Event from './Event.js';
 
 class Observer {
-  _events = [];
-
+  constructor() {
+    this._events = [];
+  }
   notify(eventName, eventArgs) {
     let event = this._getEvent(eventName);
 

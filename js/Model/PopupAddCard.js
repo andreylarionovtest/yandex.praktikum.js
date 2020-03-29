@@ -2,8 +2,6 @@ import Popup from './Popup.js';
 import Card from './Card.js';
 
 class PopupAddCard extends Popup {
-  _model = new Card();
-
   bindListeners() {
     super.bindListeners();
     this._eventAggregator.subscribe('PopupAddCardView.InputName.input', this._onInputNameInput.bind(this));
@@ -24,8 +22,11 @@ class PopupAddCard extends Popup {
     this._eventAggregator.publish('PopupAddCard.submit', this._model);
   }
   _onCardListUpdate() {
-    this._model = new Card();
     this.close();
+  }
+  open() {
+    super.open();
+    this._model = new Card();
   }
 
   _validate() {

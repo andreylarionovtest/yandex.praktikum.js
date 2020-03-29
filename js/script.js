@@ -192,6 +192,12 @@ import PopupEditProfileView from './View/PopupEditProfileView.js';
 import PopupShowImage from './Model/PopupShowImage.js';
 import PopupShowImageView from './View/PopupShowImageView.js';
 
+import Profile from './Model/Profile.js';
+import ProfileView from './View/ProfileView.js';
+
+const profile = new Profile('Jaques Causteau', 'Sailor, Researcher');
+const profileView = new ProfileView(profile);
+
 const cards = [
     new Card('Архыз', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'),
     new Card('Челябинская область', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'),
@@ -207,8 +213,6 @@ const cards = [
 
 const cardList = new CardList(cards);
 const cardListView = new CardListView(document.querySelector('.places-list'), cardList);
-
-cardListView.render();
 
 const popupContainer = document.querySelector('.popup-container');
 
@@ -228,8 +232,5 @@ const popupShowImageView = new PopupShowImageView(
   new PopupShowImage('big-size-image')
 );
 
-// popupAddCardView.render();
-// popupEditProfileView.render();
-// popupShowImageView.render();
-
-// initCallback();
+profileView.render();
+cardListView.render();

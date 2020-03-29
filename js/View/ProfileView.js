@@ -1,4 +1,4 @@
-import EventAggregator from '../Event/EventAggregator.js';
+import Observer from '../Observer/Observer.js';
 
 class ProfileView {
   _nameElement = document.querySelector('.user-info__name');
@@ -16,7 +16,7 @@ class ProfileView {
   }
 
   _bindListeners() {
-    EventAggregator.subscribe('Profile.update', this._onProfileUpdate.bind(this));
+    Observer.subscribe('Profile.update', this._onProfileUpdate.bind(this));
   }
 
   _onProfileUpdate() {

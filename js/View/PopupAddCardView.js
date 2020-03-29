@@ -30,7 +30,7 @@ class PopupAddCardView extends PopupView {
 
   bindListeners() {
     super.bindListeners();
-    this._eventAggregator.subscribe('PopupAddCard.validate', this._onCardValidate.bind(this));
+    this.getObserver().subscribe('PopupAddCard.validate', this._onCardValidate.bind(this));
   }
 
   _onCardValidate() {
@@ -38,14 +38,14 @@ class PopupAddCardView extends PopupView {
   }
 
   _handleInputNameInput(event) {
-    this._eventAggregator.publish('PopupAddCardView.InputName.input', event.currentTarget.value);
+    this.getObserver().notify('PopupAddCardView.InputName.input', event.currentTarget.value);
   }
   _handleInputLinkInput(event) {
-    this._eventAggregator.publish('PopupAddCardView.InputLink.input', event.currentTarget.value);
+    this.getObserver().notify('PopupAddCardView.InputLink.input', event.currentTarget.value);
   }
   _handleFormSubmit(event) {
     event.preventDefault();
-    this._eventAggregator.publish('PopupAddCardView.Form.submit');
+    this.getObserver().notify('PopupAddCardView.Form.submit');
   }
 
   _renderErrors() {

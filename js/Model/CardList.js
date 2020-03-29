@@ -1,4 +1,4 @@
-import EventAggregator from '../Event/EventAggregator.js';
+import Observer from '../Observer/Observer.js';
 
 class CardList {
   constructor(cards) {
@@ -12,18 +12,18 @@ class CardList {
   }
   addCard(card) {
     this._cards.push(card);
-    EventAggregator.publish('CardList.update');
+    Observer.notify('CardList.update');
   }
   removeCard(card) {
     this._cards = this._cards.filter(function (_card) {
       return _card !== card;
     });
-    EventAggregator.publish('CardList.update');
+    Observer.notify('CardList.update');
   }
 
   _bindListeners() {
-    EventAggregator.subscribe('Card.remove', this._onCardRemoved.bind(this));
-    EventAggregator.subscribe('PopupAddCard.submit', this._onPopupAddCardSubmit.bind(this));
+    Observer.subscribe('Card.remove', this._onCardRemoved.bind(this));
+    Observer.subscribe('PopupAddCard.submit', this._onPopupAddCardSubmit.bind(this));
   }
   _onCardRemoved(card) {
     this.removeCard(card);

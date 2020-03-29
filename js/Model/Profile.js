@@ -1,4 +1,4 @@
-import EventAggregator from '../Event/EventAggregator.js';
+import Observer from '../Observer/Observer.js';
 
 class Profile {
   constructor(name, job) {
@@ -9,18 +9,18 @@ class Profile {
   }
 
   _bindListeners() {
-    EventAggregator.subscribe('PopupEditProfile.submit', this._onPopupEditProfileSubmit.bind(this));
-    EventAggregator.subscribe('PopupEditProfile.close', this._onPopupEditProfileOpen.bind(this));
+    Observer.subscribe('PopupEditProfile.submit', this._onPopupEditProfileSubmit.bind(this));
+    Observer.subscribe('PopupEditProfile.close', this._onPopupEditProfileOpen.bind(this));
   }
 
   _onPopupEditProfileSubmit(profile) {
     this.name = profile.name;
     this.job = profile.job;
 
-    EventAggregator.publish('Profile.update', {...this});
+    Observer.notify('Profile.update', {...this});
   }
   _onPopupEditProfileOpen() {
-    EventAggregator.publish('Profile.update', {...this});
+    Observer.notify('Profile.update', {...this});
   }
 }
 

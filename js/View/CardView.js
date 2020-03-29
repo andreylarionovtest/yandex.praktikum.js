@@ -1,4 +1,4 @@
-import EventAggregator from '../Event/EventAggregator.js';
+import Observer from '../Observer/Observer.js';
 
 class CardView {
   _element = null;
@@ -59,19 +59,19 @@ class CardView {
   }
 
   _handleBtnLikeClick() {
-    EventAggregator.publish('CardView.like', this._card);
+    Observer.notify('CardView.like', this._card);
   }
   _handleBtnRemoveClick() {
-    EventAggregator.publish('CardView.remove', this._card);
+    Observer.notify('CardView.remove', this._card);
   }
   _handleImageCardClick(e) {
     if (e.target.classList.contains('place-card__image')) {
-      EventAggregator.publish('CardView.showImage', this._card.imageSrc)
+      Observer.notify('CardView.showImage', this._card.imageSrc)
     }
   }
 
   _bindListeners() {
-    EventAggregator.subscribe('Card.like', this._onCardLike.bind(this));
+    Observer.subscribe('Card.like', this._onCardLike.bind(this));
   }
   _onCardLike(card) {
     if (this._card === card) {

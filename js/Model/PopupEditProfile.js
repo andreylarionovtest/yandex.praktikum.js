@@ -7,10 +7,10 @@ class PopupEditProfile extends Popup {
   }
   bindListeners() {
     super.bindListeners();
-    this._eventAggregator.subscribe('PopupEditProfileView.InputName.input', this._onInputNameInput.bind(this));
-    this._eventAggregator.subscribe('PopupEditProfileView.InputJob.input', this._onInputJobInput.bind(this));
-    this._eventAggregator.subscribe('PopupEditProfileView.Form.submit', this._onFormSubmit.bind(this));
-    this._eventAggregator.subscribe('Profile.update', this._onProfileUpdate.bind(this));
+    this.getObserver().subscribe('PopupEditProfileView.InputName.input', this._onInputNameInput.bind(this));
+    this.getObserver().subscribe('PopupEditProfileView.InputJob.input', this._onInputJobInput.bind(this));
+    this.getObserver().subscribe('PopupEditProfileView.Form.submit', this._onFormSubmit.bind(this));
+    this.getObserver().subscribe('Profile.update', this._onProfileUpdate.bind(this));
   }
 
   _onInputNameInput(value) {
@@ -24,13 +24,13 @@ class PopupEditProfile extends Popup {
   _validate() {
     this.validateLength('name', this._model.name, 2, 30);
     this.validateLength('job', this._model.job, 2, 30);
-    this._eventAggregator.publish('PopupEditProfile.validate');
+    this.getObserver().notify('PopupEditProfile.validate');
   }
   _onFormSubmit() {
     if (! this.isValid()) {
       return;
     }
-    this._eventAggregator.publish('PopupEditProfile.submit', this._model);
+    this.getObserver().notify('PopupEditProfile.submit', this._model);
     this.close()
   }
   _onProfileUpdate(model) {
@@ -38,7 +38,7 @@ class PopupEditProfile extends Popup {
   }
   close() {
     super.close();
-    this._eventAggregator.publish('PopupEditProfile.close');
+    this.getObserver().notify('PopupEditProfile.close');
   }
   open() {
     super.open();

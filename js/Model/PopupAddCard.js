@@ -5,10 +5,10 @@ class PopupAddCard extends Popup {
   _model = new Card();
   bindListeners() {
     super.bindListeners();
-    this._eventAggregator.subscribe('PopupAddCardView.InputName.input', this._onInputNameInput.bind(this));
-    this._eventAggregator.subscribe('PopupAddCardView.InputLink.input', this._onInputLinkInput.bind(this));
-    this._eventAggregator.subscribe('PopupAddCardView.Form.submit', this._onFormSubmit.bind(this));
-    this._eventAggregator.subscribe('CardList.update', this._onCardListUpdate.bind(this));
+    this.getObserver().subscribe('PopupAddCardView.InputName.input', this._onInputNameInput.bind(this));
+    this.getObserver().subscribe('PopupAddCardView.InputLink.input', this._onInputLinkInput.bind(this));
+    this.getObserver().subscribe('PopupAddCardView.Form.submit', this._onFormSubmit.bind(this));
+    this.getObserver().subscribe('CardList.update', this._onCardListUpdate.bind(this));
   }
 
   open() {
@@ -29,7 +29,7 @@ class PopupAddCard extends Popup {
     if (! this.isValid()) {
       return;
     }
-    this._eventAggregator.publish('PopupAddCard.submit', this._model);
+    this.getObserver().notify('PopupAddCard.submit', this._model);
   }
   _onCardListUpdate() {
     this.close();
@@ -58,7 +58,7 @@ class PopupAddCard extends Popup {
   _validate() {
     this.validateLength('name', this._model.name, 2, 30);
     this._validateUrl('imageSrc', this._model.imageSrc, 2, 30);
-    this._eventAggregator.publish('PopupAddCard.validate');
+    this.getObserver().notify('PopupAddCard.validate');
   }
 }
 

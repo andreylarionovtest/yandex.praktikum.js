@@ -1,7 +1,7 @@
-import EventAggregator from '../Event/EventAggregator.js';
+import Observer from '../Observer/Observer.js';
 
 class PopupView {
-  _eventAggregator = EventAggregator;
+  _observer = Observer;
   _root = null;
   _content = null;
   _openButton = null;
@@ -36,10 +36,13 @@ class PopupView {
   getState() {
     return this._state;
   }
+  getObserver() {
+    return this._observer;
+  }
 
   bindListeners() {
-    this._eventAggregator.subscribe('Popup.open', this._onPopupOpen.bind(this));
-    this._eventAggregator.subscribe('Popup.close', this._onPopupClose.bind(this));
+    this.getObserver().subscribe('Popup.open', this._onPopupOpen.bind(this));
+    this.getObserver().subscribe('Popup.close', this._onPopupClose.bind(this));
   }
   bindDOMListeners() {
     if (this._openButton) {
@@ -61,10 +64,10 @@ class PopupView {
   }
 
   _handleOpenButtonClick() {
-    this._eventAggregator.publish('PopupView.open', this._state);
+    this.getObserver().notify('PopupView.open', this._state);
   }
   _handleCloseButtonClick() {
-    this._eventAggregator.publish('PopupView.close', this._state);
+    this.getObserver().notify('PopupView.close', this._state);
   }
 
   makeRootElement() {

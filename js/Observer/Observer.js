@@ -1,9 +1,9 @@
 import Event from './Event.js';
 
-class EventAggregator {
+class Observer {
   _events = [];
 
-  publish(eventName, eventArgs) {
+  notify(eventName, eventArgs) {
     let event = this._getEvent(eventName);
 
     if (!event) {
@@ -29,4 +29,4 @@ class EventAggregator {
   }
 }
 
-export default new EventAggregator;
+export default new Observer;

@@ -1,9 +1,9 @@
-import EventAggregator from '../Event/EventAggregator.js';
+import Observer from '../Observer/Observer.js';
 
 class Popup {
   _visible = false;
   _model = null;
-  _eventAggregator = EventAggregator;
+  _observer = Observer;
   _errors = {};
 
   constructor(id) {
@@ -13,17 +13,20 @@ class Popup {
 
   open() {
     this._visible = true;
-    this._eventAggregator.publish('Popup.open', this);
+    this.getObserver().notify('Popup.open', this);
   }
   close() {
     this._visible = false;
-    this._eventAggregator.publish('Popup.close', this);
+    this.getObserver().notify('Popup.close', this);
   }
   getId() {
     return this._id;
   }
   getModel() {
     return this._model;
+  }
+  getObserver() {
+    return this._observer;
   }
   getErrors() {
     return this._errors;
@@ -47,8 +50,8 @@ class Popup {
   }
 
   bindListeners() {
-    this._eventAggregator.subscribe('PopupView.open', this._onPopupViewOpen.bind(this));
-    this._eventAggregator.subscribe('PopupView.close', this._onPopupViewClose.bind(this));
+    this.getObserver().subscribe('PopupView.open', this._onPopupViewOpen.bind(this));
+    this.getObserver().subscribe('PopupView.close', this._onPopupViewClose.bind(this));
   }
   _onPopupViewOpen(popup) {
     if (this.getId() === popup.getId()) {

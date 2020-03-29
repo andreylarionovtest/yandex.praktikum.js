@@ -1,4 +1,4 @@
-import EventAggregator from '../Event/EventAggregator.js';
+import Observer from '../Observer/Observer.js';
 import CardView from './CardView.js';
 
 class CardListView {
@@ -17,7 +17,7 @@ class CardListView {
   }
 
   _bindListeners() {
-    EventAggregator.subscribe('CardList.update', this._onCardListUpdate.bind(this))
+    Observer.subscribe('CardList.update', this._onCardListUpdate.bind(this))
   }
   _onCardListUpdate() {
     this.render();

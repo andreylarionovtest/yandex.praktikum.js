@@ -4,7 +4,7 @@ class PopupShowImage extends Popup {
   imageSrc = null;
   bindListeners() {
     super.bindListeners();
-    this._eventAggregator.subscribe('CardView.showImage', this._onCardViewShowImage.bind(this));
+    this.getObserver().subscribe('CardView.showImage', this._onCardViewShowImage.bind(this));
   }
 
   _onCardViewShowImage(imageSrc) {

@@ -1,4 +1,4 @@
-import EventAggregator from '../Event/EventAggregator.js';
+import Observer from '../Observer/Observer.js';
 
 class Card {
   constructor(name, imageSrc, favorite) {
@@ -11,15 +11,15 @@ class Card {
 
   toggleLike() {
     this.favorite = !this.favorite;
-    EventAggregator.publish('Card.like', this);
+    Observer.notify('Card.like', this);
   }
   remove() {
-    EventAggregator.publish('Card.remove', this);
+    Observer.notify('Card.remove', this);
   }
 
   _bindListeners() {
-    EventAggregator.subscribe('CardView.remove', this._onCardViewRemove.bind(this));
-    EventAggregator.subscribe('CardView.like', this._onCardViewLike.bind(this));
+    Observer.subscribe('CardView.remove', this._onCardViewRemove.bind(this));
+    Observer.subscribe('CardView.like', this._onCardViewLike.bind(this));
   }
   _onCardViewRemove(card) {
     if (this === card) {

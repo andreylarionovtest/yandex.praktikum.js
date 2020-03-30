@@ -34,7 +34,7 @@ class PopupAddCardView extends PopupView {
   }
 
   _onCardValidate() {
-    this._renderErrors();
+    this.handleErrors();
   }
 
   _handleInputNameInput(event) {
@@ -48,13 +48,17 @@ class PopupAddCardView extends PopupView {
     this.getObserver().notify('PopupAddCardView.Form.submit');
   }
 
-  _renderErrors() {
+  handleErrors() {
+    this.toggleSubmitButton();
+    this.renderErrors();
+  }
+  renderErrors() {
     const nameErrorElement = document.forms.new.name.nextElementSibling;
     const linkErrorElement = document.forms.new.link.nextElementSibling;
     const errors = this.getState().getErrors();
 
     nameErrorElement.textContent = errors.name || '';
-    linkErrorElement.textContent = errors.imageSrc || '';
+    linkErrorElement.textContent = errors.link || '';
   }
 }
 

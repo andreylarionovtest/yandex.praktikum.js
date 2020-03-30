@@ -49,6 +49,17 @@ class PopupView {
     this._closeButton.addEventListener('click', this._handleCloseButtonClick.bind(this));
   }
 
+  toggleSubmitButton() {
+    const submitButton = this._root.querySelector('.popup__button');
+    const isValid = this.getState().isValid();
+
+    if (isValid) {
+      submitButton.classList.add('popup__button_enable');
+    } else {
+      submitButton.classList.remove('popup__button_enable');
+    }
+  }
+
   _onPopupOpen(state) {
     if (state.getId() === this._state.getId()) {
       this.render();

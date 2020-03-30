@@ -38,7 +38,7 @@ class PopupAddCard extends Popup {
     this.close();
   }
 
-  _validateUrl(propName, value) {
+  validateUrl(propName, value) {
     const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
       '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
@@ -60,7 +60,7 @@ class PopupAddCard extends Popup {
 
   _validate() {
     this.validateLength('name', this._model.name, 2, 30);
-    this._validateUrl('imageSrc', this._model.imageSrc, 2, 30);
+    this.validateUrl('link', this._model.imageSrc, 2, 30);
     this.getObserver().notify('PopupAddCard.validate');
   }
 }

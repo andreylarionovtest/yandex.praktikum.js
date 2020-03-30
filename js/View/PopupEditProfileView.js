@@ -35,7 +35,7 @@ class PopupEditProfileView extends PopupView {
   }
 
   _onProfileValidate() {
-    this._renderErrors();
+    this.handleErrors();
   }
 
   _handleInputNameInput(event) {
@@ -49,7 +49,11 @@ class PopupEditProfileView extends PopupView {
     this.getObserver().notify('PopupEditProfileView.Form.submit');
   }
 
-  _renderErrors() {
+  handleErrors() {
+    this.toggleSubmitButton();
+    this.renderErrors();
+  }
+  renderErrors() {
     const nameErrorElement = document.forms.profile.name.nextElementSibling;
     const jobErrorElement = document.forms.profile.job.nextElementSibling;
     const errors = this.getState().getErrors();
